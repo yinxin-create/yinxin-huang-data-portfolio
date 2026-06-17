@@ -1,7 +1,7 @@
 ---
-import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import { aboutPageContent } from "../config";
+import { withBase } from "../utils/paths";
 ---
 
 <Layout seo={aboutPageContent.seo}>
@@ -33,32 +33,29 @@ import { aboutPageContent } from "../config";
     </div>
 
     <div class="profile-photo-grid mb-12">
-      <Image
-        src={aboutPageContent.about.image_l.url}
+      <img
+        src={withBase(aboutPageContent.about.image_l.url)}
         alt={aboutPageContent.about.image_l.alt}
         width={360}
         height={360}
-        quality={95}
         loading="eager"
         decoding="async"
         class="profile-photo"
       />
-      <Image
-        src={aboutPageContent.about.image_r.url}
+      <img
+        src={withBase(aboutPageContent.about.image_r.url)}
         alt={aboutPageContent.about.image_r.alt}
         width={360}
         height={360}
-        quality={95}
         loading="lazy"
         decoding="async"
         class="profile-photo"
       />
-      <Image
-        src="/img/profile-third.jpg"
+      <img
+        src={withBase("/img/profile-third.jpg")}
         alt="Profile moment"
         width={360}
         height={360}
-        quality={95}
         loading="lazy"
         decoding="async"
         class="profile-photo"

@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import {
   navBarLinks,
   identity,
@@ -8,6 +7,7 @@ import {
 } from "../config";
 import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 import type { SEOInfo } from "../types/config";
+import { withBase, withoutBase } from "../utils/paths";
 import "@styles/base.css";
 
 interface Props {
@@ -15,7 +15,12 @@ interface Props {
 }
 
 const { seo } = Astro.props;
-const ogImageUrl = seo.image;
+const absoluteUrl = (path: string) =>
+  path.startsWith("http://") || path.startsWith("https://")
+    ? path
+    : new URL(withBase(path), Astro.site).toString();
+const ogImageUrl = absoluteUrl(seo.image);
+const currentPath = withoutBase(Astro.url.pathname);
 ---
 
 <script>
@@ -65,11 +70,11 @@ const ogImageUrl = seo.image;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="apple-touch-icon" sizes="180x180" href={withBase("/apple-touch-icon.png")} />
+    <link rel="icon" type="image/png" sizes="32x32" href={withBase("/favicon-32x32.png")} />
+    <link rel="icon" type="image/png" sizes="16x16" href={withBase("/favicon-16x16.png")} />
+    <link rel="manifest" href={withBase("/site.webmanifest")} />
+    <link rel="sitemap" href={withBase("/sitemap-index.xml")} />
     <link rel="canonical" href={seo.url} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -116,7 +121,7 @@ const ogImageUrl = seo.image;
             url: seo.url,
             image: {
               "@type": "ImageObject",
-              url: seo.image,
+              url: ogImageUrl,
             },
             jobTitle: "Data analysis portfolio",
             worksFor: {
@@ -161,7 +166,7 @@ const ogImageUrl = seo.image;
             },
             image: {
               "@type": "ImageObject",
-              url: seo.image,
+              url: ogImageUrl,
             },
             inLanguage: "en",
           },
@@ -174,16 +179,14 @@ const ogImageUrl = seo.image;
       <div
         class="px-6 py-6 max-w-6xl mx-auto flex items-center justify-between"
       >
-        <a href="/">
-          <Image
-            src={identity.logo}
+        <a href={withBase("/")}>
+          <img
+            src={withBase(identity.logo)}
             alt={"Logo"}
             width={50}
             height={50}
             loading="eager"
             decoding="async"
-            quality={100}
-            densities={[1.5, 2]}
             class="w-[50px] h-[50px] object-cover"
           />
         </a>
@@ -192,8 +195,8 @@ const ogImageUrl = seo.image;
             {
               navBarLinks.map((link) => {
                 const isActive =
-                  Astro.url.pathname === link.url ||
-                  (link.url !== "/" && Astro.url.pathname.startsWith(link.url));
+                  currentPath === link.url ||
+                  (link.url !== "/" && currentPath.startsWith(link.url));
                 return (
                   <li>
                     <a
@@ -202,7 +205,7 @@ const ogImageUrl = seo.image;
                           ? "text-[#0f766e]"
                           : "text-[#344049]/65 hover:text-[#18232c] hover:bg-[#0f766e]/10"
                       }`}
-                      href={link.url}
+                      href={link.external ? link.url : withBase(link.url)}
                       target={link.external ? "_blank" : "_self"}
                     >
                       {link.title}
@@ -232,9 +235,8 @@ const ogImageUrl = seo.image;
                 {
                   navBarLinks.map((link) => {
                     const isActive =
-                      Astro.url.pathname === link.url ||
-                      (link.url !== "/" &&
-                        Astro.url.pathname.startsWith(link.url));
+                      currentPath === link.url ||
+                      (link.url !== "/" && currentPath.startsWith(link.url));
                     return (
                       <li>
                         <a
@@ -243,7 +245,7 @@ const ogImageUrl = seo.image;
                               ? "text-[#0f766e] font-medium bg-[#0f766e]/10 border-r-2 border-[#0f766e]"
                               : "opacity-80 hover:opacity-100 hover:bg-[#0f766e]/10 hover:text-[#18232c]"
                           }`}
-                          href={link.url}
+                          href={link.external ? link.url : withBase(link.url)}
                           target={link.external ? "_blank" : "_self"}
                         >
                           {link.title}

@@ -1,8 +1,8 @@
 ---
-import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import { featuredPageContent, featuredPosts } from "../config";
 import analysis from "../../public/data/world-bank-analysis.json";
+import { withBase } from "../utils/paths";
 
 const caseStudies = [
   {
@@ -56,12 +56,11 @@ const generatedCaseStudies = analysis.projects;
     <div class="grid gap-8">
       {featuredPosts.map((project, index) => (
         <article class="project-card" id={caseStudies[index].id}>
-          <Image
-            src={project.image.url}
+          <img
+            src={withBase(project.image.url)}
             alt={project.image.alt}
             width={800}
             height={520}
-            quality={100}
             loading="lazy"
             decoding="async"
             class="project-image"
@@ -106,7 +105,7 @@ const generatedCaseStudies = analysis.projects;
               >
                 Dataset source
               </a>
-              <a href="/about" class="button-link secondary">
+              <a href={withBase("/about")} class="button-link secondary">
                 Skills shown
               </a>
             </div>

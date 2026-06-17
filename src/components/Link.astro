@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { withBase } from "../utils/paths";
 interface Props {
   text: string;
   href: string;
@@ -9,12 +10,13 @@ interface Props {
 }
 
 const { text, href, external, noAnchor, icon } = Astro.props;
+const resolvedHref = external ? href : withBase(href);
 ---
 
 {
   !noAnchor ? (
     <a
-      href={href}
+      href={resolvedHref}
       target={external ? "_blank" : "_self"}
       class="flex items-center gap-2 opacity-60 group-hover:opacity-30 hover:!opacity-60 transition-opacity"
     >

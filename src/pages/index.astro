@@ -1,8 +1,8 @@
 ---
-import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import { featuredPosts, homePageContent, identity } from "../config";
 import Link from "../components/Link.astro";
+import { withBase } from "../utils/paths";
 ---
 
 <Layout seo={homePageContent.seo}>
@@ -21,32 +21,29 @@ import Link from "../components/Link.astro";
       </div>
 
       <div class="profile-photo-grid hero-photos">
-        <Image
-          src="/img/profile-main.jpg"
+        <img
+          src={withBase("/img/profile-main.jpg")}
           alt="Profile portrait"
           width={360}
           height={360}
-          quality={95}
           loading="eager"
           decoding="async"
           class="profile-photo"
         />
-        <Image
-          src="/img/profile-about.jpg"
+        <img
+          src={withBase("/img/profile-about.jpg")}
           alt="Profile moment"
           width={360}
           height={360}
-          quality={95}
           loading="eager"
           decoding="async"
           class="profile-photo"
         />
-        <Image
-          src="/img/profile-third.jpg"
+        <img
+          src={withBase("/img/profile-third.jpg")}
           alt="Profile moment"
           width={360}
           height={360}
-          quality={95}
           loading="eager"
           decoding="async"
           class="profile-photo"
@@ -90,7 +87,7 @@ import Link from "../components/Link.astro";
           development indicators.
         </p>
       </div>
-      <a class="underline-hover text-sm" href="/featured">View all</a>
+      <a class="underline-hover text-sm" href={withBase("/featured")}>View all</a>
     </div>
 
     <div class="grid gap-5 md:grid-cols-3">
@@ -100,7 +97,7 @@ import Link from "../components/Link.astro";
             <p class="mb-2 text-sm opacity-60">{project.publisher}</p>
             <h3 class="mb-2 text-xl font-semibold">{project.title}</h3>
             <p class="mb-4 opacity-75">{project.description}</p>
-            <a href={project.url} class="gradient-link">
+            <a href={withBase(project.url)} class="gradient-link">
               Read case study
             </a>
           </div>
