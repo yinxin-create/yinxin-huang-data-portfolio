@@ -379,12 +379,23 @@ code {
   background: #fffdf8;
 }
 
+.about-intro {
+  display: grid;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.about-copy {
+  max-width: 42rem;
+  font-size: 1.02rem;
+}
+
 .profile-panel {
   border-radius: var(--radius-md);
-  padding: 1rem;
+  padding: 1.4rem;
   display: grid;
   gap: 0.45rem;
-  align-content: start;
+  align-content: center;
   background: #f7f0ff;
   border-color: #d7c5ee;
 }
@@ -509,6 +520,15 @@ code {
 }
 
 @media (min-width: 900px) {
+  .about-intro {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  .about-copy {
+    max-width: none;
+  }
+
   .hero-grid {
     grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
     align-items: center;
