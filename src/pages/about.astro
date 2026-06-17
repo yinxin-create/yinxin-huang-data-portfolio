@@ -1,0 +1,91 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { aboutPageContent } from "../config";
+---
+
+<Layout seo={aboutPageContent.seo}>
+  <section class="mx-auto mt-10 max-w-6xl px-6">
+    <h1 class="mb-2 text-3xl">About</h1>
+    <p class="subtitle mb-8">{aboutPageContent.subtitle}</p>
+
+    <div class="mb-12 grid gap-6 sm:grid-cols-[1.3fr_0.7fr]">
+      <div>
+        <p class="mb-5 opacity-80">
+          I am interested in data analysis because it sits between curiosity
+          and evidence. For this portfolio, I chose public World Bank indicators
+          and rebuilt them into a few focused questions.
+        </p>
+        <p class="opacity-80">
+          The emphasis is on the working process: what data I used, how I
+          cleaned it, which comparisons were fair, and where the charts changed
+          the interpretation.
+        </p>
+      </div>
+      <div class="profile-panel">
+        <span>Direction</span>
+        <strong>Data analysis</strong>
+        <span>Focus</span>
+        <strong>Python · SQL · BI</strong>
+        <span>Data source</span>
+        <strong>World Bank Open Data</strong>
+      </div>
+    </div>
+
+    <div class="profile-photo-grid mb-12">
+      <Image
+        src={aboutPageContent.about.image_l.url}
+        alt={aboutPageContent.about.image_l.alt}
+        width={360}
+        height={360}
+        quality={95}
+        loading="eager"
+        decoding="async"
+        class="profile-photo"
+      />
+      <Image
+        src={aboutPageContent.about.image_r.url}
+        alt={aboutPageContent.about.image_r.alt}
+        width={360}
+        height={360}
+        quality={95}
+        loading="lazy"
+        decoding="async"
+        class="profile-photo"
+      />
+      <Image
+        src="/img/profile-third.jpg"
+        alt="Profile moment"
+        width={360}
+        height={360}
+        quality={95}
+        loading="lazy"
+        decoding="async"
+        class="profile-photo"
+      />
+    </div>
+  </section>
+
+  <section class="mx-auto mt-10 max-w-6xl px-6">
+    <h2 class="mb-5 text-2xl">Skills</h2>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="skill-panel">
+        <h3>Python analysis</h3>
+        <p>pandas, NumPy, requests, cleaning, reshaping, and repeatable scripts.</p>
+      </div>
+      <div class="skill-panel">
+        <h3>Table structure</h3>
+        <p>Country-year keys, joins, aggregation logic, and data quality checks.</p>
+      </div>
+      <div class="skill-panel">
+        <h3>Dashboard thinking</h3>
+        <p>KPI cards, trend charts, rankings, filters, and compact summaries.</p>
+      </div>
+      <div class="skill-panel">
+        <h3>Writing notes</h3>
+        <p>Findings, assumptions, limitations, and short explanations beside the charts.</p>
+      </div>
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-06-17T10:09:40.764529+00:00",
+  "source": "World Bank Open Data API",
+  "dateRange": "2000-2023",
+  "countries": {
+    "USA": "United States",
+    "CHN": "China",
+    "IND": "India",
+    "DEU": "Germany",
+    "GBR": "United Kingdom",
+    "BRA": "Brazil",
+    "ZAF": "South Africa"
+  },
+  "projects": [
+    {
+      "id": "gdp-scale-growth",
+      "title": "GDP Growth Quality and Resilience",
+      "question": "Which economies combine scale, long-run momentum, lower volatility, and post-2019 recovery?",
+      "chart": "/media/yinxin-gdp-scale.svg",
+      "methods": [
+        "Country-year panel construction",
+        "Indexed growth baseline",
+        "CAGR and YoY volatility",
+        "2019 recovery benchmark",
+        "Bubble-size GDP scale comparison"
+      ],
+      "highlights": [
+        "United States: latest GDP $27.3T, CAGR 4.3%, volatility 2.8%",
+        "China: latest GDP $18.3T, CAGR 12.5%, volatility 8.6%",
+        "Germany: latest GDP $4.6T, CAGR 3.7%, volatility 7.8%",
+        "India: latest GDP $3.6T, CAGR 9.3%, volatility 8.6%",
+        "Strongest post-2019 recovery: IND 28.3%, USA 27.6%, CHN 25.5%"
+      ]
+    },
+    {
+      "id": "internet-health-development",
+      "title": "Digital Development and Human Outcomes",
+      "question": "How do internet adoption, health context, urbanization, and life expectancy move together?",
+      "chart": "/media/yinxin-internet-adoption.svg",
+      "methods": [
+        "Latest-available indicator joins",
+        "Correlation matrix",
+        "Z-score country profile heatmap",
+        "Bubble chart with health spending scale"
+      ],
+      "highlights": [
+        "United Kingdom: internet users 95.4%, life expectancy 81.2 years",
+        "United States: internet users 93.5%, life expectancy 78.4 years",
+        "Germany: internet users 92.5%, life expectancy 81.0 years",
+        "China: internet users 90.6%, life expectancy 78.0 years",
+        "Internet and life expectancy correlation in the panel: 0.71"
+      ]
+    },
+    {
+      "id": "gdp-per-capita-context",
+      "title": "Prosperity Context Beyond Headline GDP",
+      "question": "How does the story change when GDP is read beside population, per-capita output, and urbanization?",
+      "chart": "/media/yinxin-gdp-per-capita.svg",
+      "methods": [
+        "Population-scale bubble plot",
+        "GDP per capita ranking",
+        "Urbanization context",
+        "Rank-based composite score"
+      ],
+      "highlights": [
+        "United States: GDP per capita $81,032, population 337M",
+        "Germany: GDP per capita $54,777, population 83M",
+        "United Kingdom: GDP per capita $49,944, population 68M",
+        "China: GDP per capita $12,951, population 1,411M"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { featuredPosts, homePageContent, identity } from "../config";
+import Link from "../components/Link.astro";
+---
+
+<Layout seo={homePageContent.seo}>
+  <section class="mx-auto mt-10 max-w-6xl px-6">
+    <div class="hero-grid">
+      <div>
+        <p class="subtitle mb-3">{homePageContent.role}</p>
+        <h1 class="mb-5 text-4xl leading-tight sm:text-5xl">
+          Public data, cleaned and explained.
+        </h1>
+        <p class="mb-8 max-w-2xl text-lg opacity-80">
+          {identity.name} uses World Bank Open Data to practice the kind of
+          work analysts do every day: collect data, clean it, compare countries
+          fairly, make charts, and write down what the numbers actually suggest.
+        </p>
+      </div>
+
+      <div class="profile-photo-grid hero-photos">
+        <Image
+          src="/img/profile-main.jpg"
+          alt="Profile portrait"
+          width={360}
+          height={360}
+          quality={95}
+          loading="eager"
+          decoding="async"
+          class="profile-photo"
+        />
+        <Image
+          src="/img/profile-about.jpg"
+          alt="Profile moment"
+          width={360}
+          height={360}
+          quality={95}
+          loading="eager"
+          decoding="async"
+          class="profile-photo"
+        />
+        <Image
+          src="/img/profile-third.jpg"
+          alt="Profile moment"
+          width={360}
+          height={360}
+          quality={95}
+          loading="eager"
+          decoding="async"
+          class="profile-photo"
+        />
+      </div>
+    </div>
+
+    <div class="mb-10 flex flex-wrap gap-3">
+      {homePageContent.links.map((link) => (
+        <Link
+          text={link.title}
+          href={link.url}
+          external={link.external}
+          icon={link.icon}
+        />
+      ))}
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-3">
+      <div class="metric-panel">
+        <span class="metric-label">Core stack</span>
+        <strong>Python · SQL · BI</strong>
+      </div>
+      <div class="metric-panel">
+        <span class="metric-label">Data source</span>
+        <strong>World Bank API</strong>
+      </div>
+      <div class="metric-panel">
+        <span class="metric-label">Project style</span>
+        <strong>Case studies</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-16 max-w-6xl px-6">
+    <div class="mb-6 flex items-end justify-between gap-4">
+      <div>
+        <h2 class="text-2xl">Selected World Bank analyses</h2>
+        <p class="mt-2 opacity-60">
+          Three small but complete analyses using public economic and
+          development indicators.
+        </p>
+      </div>
+      <a class="underline-hover text-sm" href="/featured">View all</a>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-3">
+      {featuredPosts.map((project) => (
+        <article class="project-row">
+          <div>
+            <p class="mb-2 text-sm opacity-60">{project.publisher}</p>
+            <h3 class="mb-2 text-xl font-semibold">{project.title}</h3>
+            <p class="mb-4 opacity-75">{project.description}</p>
+            <a href={project.url} class="gradient-link">
+              Read case study
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto mt-16 max-w-6xl px-6">
+    <h2 class="mb-5 text-2xl">How I worked</h2>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="skill-panel">
+        <h3>Data collection</h3>
+        <p>
+          Pulling World Bank API data into country-year tables that can be
+          checked, reused, and charted.
+        </p>
+      </div>
+      <div class="skill-panel">
+        <h3>Metric design</h3>
+        <p>
+          Comparing totals with per-person metrics, growth rates, volatility,
+          and recovery from a baseline year.
+        </p>
+      </div>
+      <div class="skill-panel">
+        <h3>Chart choices</h3>
+        <p>
+          Using line charts, rankings, heatmaps, and bubble charts only where
+          they help answer the question.
+        </p>
+      </div>
+      <div class="skill-panel">
+        <h3>Tools used</h3>
+        <p>
+          Python, pandas, seaborn, matplotlib, SQL-style table thinking, and
+          short written notes for each result.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

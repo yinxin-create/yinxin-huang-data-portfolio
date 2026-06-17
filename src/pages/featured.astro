@@ -1,0 +1,118 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { featuredPageContent, featuredPosts } from "../config";
+import analysis from "../../public/data/world-bank-analysis.json";
+
+const caseStudies = [
+  {
+    id: "gdp-scale-growth",
+    question:
+      "Which economies combine scale, long-run momentum, lower volatility, and stronger recovery after 2019?",
+    method:
+      "Built a country-year panel from the World Bank API, indexed GDP to a 2000 baseline, calculated CAGR, year-over-year volatility, 2020 shock, and latest recovery against the 2019 baseline.",
+    insight:
+      "The chart separates size from quality of growth: a country can be large, fast-growing, volatile, or resilient, and those are different analyst claims.",
+    deliverable:
+      "Country-year dataset, four-view chart, recovery ranking, and notes on what each comparison can and cannot show.",
+  },
+  {
+    id: "internet-health-development",
+    question:
+      "How do internet adoption, health context, urbanization, and life expectancy move together?",
+    method:
+      "Joined latest-available development indicators, tracked adoption trajectories, compared internet access against life expectancy with health-spending bubble size, and added z-score and correlation heatmaps.",
+    insight:
+      "The analysis checks whether a technology metric still makes sense when it is read beside health, spending, and urban structure.",
+    deliverable:
+      "Indicator dictionary, cleaned analytical table, multi-panel dashboard chart, and correlation-based interpretation.",
+  },
+  {
+    id: "gdp-per-capita-context",
+    question:
+      "How does the story change when GDP is read beside population, per-capita output, and urbanization?",
+    method:
+      "Merged GDP per capita, total population, headline GDP, life expectancy, internet adoption, and urban population share; then compared rankings, bubble size, and a rank-based context score.",
+    insight:
+      "The analysis shows why large economies and high-living-standard economies should not be treated as the same category without population and per-person context.",
+    deliverable:
+      "Population-scale bubble chart, per-capita ranking, urbanization comparison, composite score, and caveated analyst summary.",
+  },
+];
+
+const generatedCaseStudies = analysis.projects;
+---
+
+<Layout seo={featuredPageContent.seo}>
+  <section class="mx-auto mt-10 max-w-6xl px-6">
+    <h1 class="mb-2 text-3xl">World Bank data analysis projects</h1>
+    <p class="subtitle mb-8">{featuredPageContent.subtitle}</p>
+    <p class="mb-10 max-w-2xl opacity-75">
+      I used World Bank Open Data as the raw source, then rebuilt the work
+      around three questions: growth quality, digital development, and
+      prosperity beyond headline GDP.
+    </p>
+
+    <div class="grid gap-8">
+      {featuredPosts.map((project, index) => (
+        <article class="project-card" id={caseStudies[index].id}>
+          <Image
+            src={project.image.url}
+            alt={project.image.alt}
+            width={800}
+            height={520}
+            quality={100}
+            loading="lazy"
+            decoding="async"
+            class="project-image"
+          />
+          <div class="p-5">
+            <p class="mb-2 text-sm opacity-60">{project.publisher}</p>
+            <h2 class="mb-3 text-2xl">{project.title}</h2>
+            <p class="mb-5 opacity-75">{project.description}</p>
+
+            <div class="mb-5 grid gap-3 lg:grid-cols-2">
+              <div class="note-row">
+                <span>Question</span>
+                <p>{caseStudies[index].question}</p>
+              </div>
+              <div class="note-row">
+                <span>Method</span>
+                <p>{caseStudies[index].method}</p>
+              </div>
+              <div class="note-row">
+                <span>Insight</span>
+                <p>{caseStudies[index].insight}</p>
+              </div>
+              <div class="note-row">
+                <span>Deliverable</span>
+                <p>{caseStudies[index].deliverable}</p>
+              </div>
+              <div class="note-row">
+                <span>Highlights</span>
+                <ul class="grid gap-1">
+                  {generatedCaseStudies[index].highlights.map((highlight) => (
+                    <li>{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <a
+                href="https://data.worldbank.org/"
+                target="_blank"
+                class="button-link"
+              >
+                Dataset source
+              </a>
+              <a href="/about" class="button-link secondary">
+                Skills shown
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Layout>
